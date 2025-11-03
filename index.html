@@ -3,15 +3,18 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Verification Required</title>
+    <title>Human Verification</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --bg: #f8fafc;
-            --text: #1e293b;
-            --border: #e2e8f0;
-            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --primary: #4f46e5;
+            --primary-light: #6366f1;
+            --bg: #f9fafb;
+            --card: #ffffff;
+            --text: #1f2937;
+            --text-light: #6b7280;
+            --border: #e5e7eb;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
 
         * {
@@ -21,44 +24,45 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
             color: var(--text);
-            line-height: 1.6;
             display: flex;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            padding: 20px;
+            padding: 16px;
+            line-height: 1.5;
         }
 
         .container {
-            background: white;
+            background: var(--card);
             border-radius: 16px;
-            box-shadow: var(--shadow);
             padding: 40px 32px;
-            max-width: 480px;
             width: 100%;
+            max-width: 420px;
             text-align: center;
+            box-shadow: var(--shadow);
             border: 1px solid var(--border);
         }
 
         .icon {
-            font-size: 64px;
-            margin-bottom: 24px;
+            font-size: 48px;
+            margin-bottom: 20px;
             color: var(--primary);
         }
 
         h1 {
-            font-size: 28px;
-            margin-bottom: 16px;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 12px;
             color: var(--text);
         }
 
         p {
+            font-size: 15px;
+            color: var(--text-light);
             margin-bottom: 28px;
-            color: #64748b;
-            font-size: 16px;
         }
 
         .checkbox-container {
@@ -66,68 +70,76 @@
             align-items: center;
             justify-content: center;
             gap: 12px;
-            margin-bottom: 32px;
+            margin-bottom: 28px;
+            cursor: pointer;
             user-select: none;
         }
 
         .custom-checkbox {
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
             border: 2px solid var(--border);
             border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
             transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .custom-checkbox::after {
+            content: 'Checkmark';
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+            opacity: 0;
+            transition: opacity 0.2s ease;
         }
 
         .custom-checkbox.checked {
-            background-color: var(--primary);
+            background: var(--primary);
             border-color: var(--primary);
         }
 
         .custom-checkbox.checked::after {
-            content: '✓';
-            color: white;
-            font-weight: bold;
-            font-size: 16px;
+            opacity: 1;
         }
 
         .checkbox-label {
-            cursor: pointer;
-            font-size: 16px;
+            font-size: 15px;
+            font-weight: 500;
             color: var(--text);
         }
 
         button {
-            background-color: var(--primary);
+            background: var(--primary);
             color: white;
             border: none;
-            padding: 14px 32px;
-            font-size: 16px;
+            padding: 12px 24px;
+            font-size: 15px;
             font-weight: 600;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
+            border-radius: 10px;
             width: 100%;
+            cursor: not-allowed;
             opacity: 0.5;
-            pointer-events: none;
+            transition: all 0.2s ease;
         }
 
         button.enabled {
             opacity: 1;
-            pointer-events: auto;
+            cursor: pointer;
         }
 
-        button:hover.enabled {
-            background-color: var(--primary-dark);
+        button.enabled:hover {
+            background: var(--primary-light);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
         }
 
         .footer {
-            margin-top: 32px;
-            font-size: 14px;
-            color: #94a3b8;
+            margin-top: 24px;
+            font-size: 13px;
+            color: var(--text-light);
         }
 
         .footer a {
@@ -142,20 +154,20 @@
 </head>
 <body>
     <div class="container">
-        <div class="icon">🔒</div>
+        <div class="icon">Padlock</div>
         <h1>Verify You're Human</h1>
-        <p>To continue, please confirm that you are not a robot.</p>
+        <p>Please confirm you're not a robot to continue.</p>
 
         <div class="checkbox-container" onclick="toggleCheckbox()">
             <div id="checkbox" class="custom-checkbox"></div>
-            <label class="checkbox-label" for="checkbox">I'm not a robot</label>
+            <div class="checkbox-label">I'm not a robot</div>
         </div>
 
         <button id="continueBtn" onclick="continueToSite()">Continue</button>
 
         <div class="footer">
-            This helps us prevent automated access and protect our services.
-            <br><a href="#" onclick="event.preventDefault(); alert('Learn more about bot detection and online security.');">Learn more</a>
+            This helps prevent spam and abuse.<br>
+            <a href="#" onclick="event.preventDefault(); alert('We analyze interaction patterns to detect bots. No data is stored.');">Learn more</a>
         </div>
     </div>
 
@@ -170,7 +182,7 @@
             if (isChecked) {
                 checkbox.classList.add('checked');
                 button.classList.add('enabled');
-                button.textContent = 'Continue to Prize';
+                button.textContent = 'Continue to Google';
             } else {
                 checkbox.classList.remove('checked');
                 button.classList.remove('enabled');
@@ -180,16 +192,9 @@
 
         function continueToSite() {
             if (isChecked) {
-                window.location.href = 'https://rapidhit.github.io/bestoffers';
+                window.location.href = 'https://google.com';
             }
         }
-
-        // Optional: Add subtle human-like delay on load
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.body.style.opacity = '1';
-            }, 100);
-        });
     </script>
 </body>
 </html>
